@@ -700,6 +700,20 @@ namespace e4ga{
             return mv;
         }
 
+        /// \brief functions that enables to extract the coefficients of grade grade of this multivector and initialize a vector
+        /// \tparam Arguments - denotes a variadic list of index
+        /// \param grade : the considered grade
+        /// \return a vector of the components of grade grade of this mv
+        inline std::vector<T> coefficients(const int grade) const {
+            auto itThisMV = this->findGrade(grade);
+            if(itThisMV==this->mvData.end()){
+                return {};
+            }
+            std::vector<T> coefficients(itThisMV->vec.data(), itThisMV->vec.data() + itThisMV->vec.size());
+            return coefficients;
+        }
+
+
 
         /// \brief set of functions that return multivectors containing only the value '1' for the specified component.
         Mvec e1() const {return this->extractOneComponent(1,4, 0);}
